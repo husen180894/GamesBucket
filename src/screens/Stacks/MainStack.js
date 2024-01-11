@@ -2,7 +2,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import {Platform} from 'react-native';
 
-import {STATIC_DATA, COLORS, SIZES} from '~assets/constants';
+import {STATIC_DATA, COLORS, SIZES, FONTS} from '~assets/constants';
 
 const Tab = createBottomTabNavigator();
 
@@ -17,14 +17,25 @@ function MainStack() {
         tabBarInactiveTintColor: COLORS.appGray,
         headerShown: false,
         tabBarShowLabel: true,
+        tabBarIconStyle: {marginBottom: -5},
         tabBarStyle: {
           backgroundColor: COLORS.appPrimary,
-          paddingBottom: 5,
+          paddingBottom: 15,
           height:
             Platform.OS === 'android'
               ? SIZES.HEIGHT * 0.09
               : SIZES.HEIGHT * 0.1,
+          shadowColor: COLORS.appPrimary,
+          shadowOffset: {
+            width: 0,
+            height: 2,
+          },
         },
+        tabBarLabelStyle: {
+          fontSize: SIZES.smd,
+          fontFamily: FONTS.fnm,
+        },
+        tabBarHideOnKeyboard: true,
       }}>
       {bottomTabList.map(tab => {
         return (
