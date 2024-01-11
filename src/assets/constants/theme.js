@@ -68,6 +68,13 @@ export const STYLES = {
   },
 
   // Button styles
+
+  // Typography styles
+  headerTitle: {
+    fontSize: SIZES.sxxl,
+    fontFamily: FONTS.fnm,
+    color: COLORS.white,
+  },
 };
 
 const appTheme = {

@@ -22,8 +22,6 @@ const App = () => {
           initialRouteName="Main"
           screenOptions={{headerShown: false}}>
           <Stack.Screen name="Main" component={MainStack} />
-          {/* <Stack.Screen name="Settings" component={SettingScreen} />
-          <Stack.Screen name="Home" component={HomeScreen} /> */}
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaView>

@@ -1,4 +1,10 @@
-import {Brodcast, DiscountCircle, Game, Setting} from 'iconsax-react-native';
+import {
+  Brodcast,
+  DiscountCircle,
+  Game,
+  SearchNormal,
+  Setting,
+} from 'iconsax-react-native';
 import HomeScreen from '~screens/Home/HomeScreen';
 import {COLORS, SIZES} from './theme';
 
@@ -48,6 +54,19 @@ const bottomTabList = [
     active: (
       <Setting size={SIZES.s3xl} variant="Bold" color={COLORS.appYellow} />
     ),
+  },
+];
+
+export const topHeaderData = [
+  {
+    id: 'topTabsList01',
+    type: 'Live',
+    options: [
+      {
+        id: 'topTabOptions01',
+        icon: <SearchNormal size={22} color={COLORS.white} />,
+      },
+    ],
   },
 ];
 
