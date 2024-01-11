@@ -2,8 +2,13 @@ import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect} from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import {StatusBar} from 'react-native';
-import {Button} from '@rneui/themed';
-import {EmojiHappy} from 'iconsax-react-native';
+
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
+import MainStack from './src/screens/Stacks/MainStack';
+
+const Stack = createNativeStackNavigator();
 
 const App = () => {
   useEffect(() => {
@@ -12,12 +17,15 @@ const App = () => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle={'light-content'} backgroundColor={'#000'} />
-      <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <Text style={styles.text}>Hello Developer</Text>
-        <Button>
-          <EmojiHappy color="#fff" variant="Broken" size={34} />
-        </Button>
-      </ScrollView>
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName="Main"
+          screenOptions={{headerShown: false}}>
+          <Stack.Screen name="Main" component={MainStack} />
+          {/* <Stack.Screen name="Settings" component={SettingScreen} />
+          <Stack.Screen name="Home" component={HomeScreen} /> */}
+        </Stack.Navigator>
+      </NavigationContainer>
     </SafeAreaView>
   );
 };
