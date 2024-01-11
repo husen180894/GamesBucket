@@ -19,7 +19,7 @@ function MainStack() {
         tabBarShowLabel: true,
         tabBarIconStyle: {marginBottom: -5},
         tabBarStyle: {
-          backgroundColor: COLORS.appPrimary,
+          backgroundColor: COLORS.appSecondary,
           paddingBottom: 15,
           height:
             Platform.OS === 'android'
