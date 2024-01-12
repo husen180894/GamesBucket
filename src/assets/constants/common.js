@@ -4,6 +4,7 @@ import {
   Game,
   SearchNormal,
   Setting,
+  Sort,
 } from 'iconsax-react-native';
 import HomeScreen from '~screens/Home/HomeScreen';
 import {COLORS, SIZES} from './theme';
@@ -60,11 +61,33 @@ const bottomTabList = [
 export const topHeaderData = [
   {
     id: 'topTabsList01',
-    type: 'Live',
+    type: 'live',
     options: [
       {
         id: 'topTabOptions01',
-        icon: <SearchNormal size={22} color={COLORS.white} />,
+        icon: <SearchNormal size={SIZES.sxxl} color={COLORS.white} />,
+        name: 'search',
+      },
+      {
+        id: 'topTabOptions02',
+        icon: <Sort size={SIZES.sxxl} color={COLORS.white} />,
+        name: 'filter',
+      },
+    ],
+  },
+  {
+    id: 'topTabsList02',
+    type: 'explore',
+    options: [
+      {
+        id: 'topTabOptions21',
+        icon: <SearchNormal size={SIZES.sxxl} color={COLORS.white} />,
+        name: 'search',
+      },
+      {
+        id: 'topTabOptions22',
+        icon: <Sort size={SIZES.sxxl} color={COLORS.white} />,
+        name: 'filter',
       },
     ],
   },
@@ -72,6 +95,7 @@ export const topHeaderData = [
 
 const STATIC_DATA = {
   bottomTabList,
+  topHeaderData,
 };
 
 export default STATIC_DATA;

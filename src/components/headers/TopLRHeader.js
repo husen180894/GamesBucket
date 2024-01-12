@@ -2,10 +2,11 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {Header} from '@rneui/themed';
 import {COLORS, SIZES, STYLES} from '~assets/constants';
-import {SearchNormal, Sort} from 'iconsax-react-native';
+import {topHeaderData} from '~assets/constants/common';
 
 const TopLRHeader = props => {
-  const {title} = props;
+  const {title, type, onAction} = props;
+  const rightOptions = topHeaderData.filter(item => item.type === type)[0];
   return (
     <Header
       containerStyle={styles.headerContainer}
@@ -21,12 +22,16 @@ const TopLRHeader = props => {
       }}
       rightComponent={
         <View style={styles.headerRight}>
-          <TouchableOpacity onPress={() => {}}>
-            <SearchNormal size={22} color={COLORS.white} />
-          </TouchableOpacity>
-          <TouchableOpacity style={{marginLeft: 10}} onPress={() => {}}>
-            <Sort size={22} color={COLORS.white} />
-          </TouchableOpacity>
+          {rightOptions &&
+            rightOptions.options.map(option => {
+              return (
+                <TouchableOpacity
+                  key={option.id}
+                  onPress={() => onAction(option.name)}>
+                  {option.icon}
+                </TouchableOpacity>
+              );
+            })}
         </View>
       }
     />
@@ -37,18 +42,19 @@ export default TopLRHeader;
 
 const styles = StyleSheet.create({
   headerContainer: {
+    borderBottomWidth: 0,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: COLORS.appPrimary,
     marginBottom: 10,
     width: '100%',
-    paddingHorizontal: 15,
-    paddingVertical: 15,
+    paddingHorizontal: SIZES.smd,
+    paddingVertical: SIZES.smd,
   },
   headerRight: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 10,
+    gap: SIZES.slg,
   },
 });
