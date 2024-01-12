@@ -13,6 +13,7 @@ export const COLORS = {
   appGreen: '#6b6b6b',
   appLightGreen: '#ACACAC',
   appGray: '#8593a3',
+  appTransparent: '#ffffff00',
 };
 
 export const SIZES = {
