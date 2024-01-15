@@ -2,14 +2,14 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {STYLES} from '~assets/constants/theme';
 
-const SettingScreen = () => {
+const OfferScreen = () => {
   return (
     <View style={STYLES.container}>
-      <Text>SettingScreen</Text>
+      <Text>OfferScreen</Text>
     </View>
   );
 };
 
-export default SettingScreen;
+export default OfferScreen;
 
 const styles = StyleSheet.create({});

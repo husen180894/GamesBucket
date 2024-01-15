@@ -2,14 +2,14 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {STYLES} from '~assets/constants/theme';
 
-const SettingScreen = () => {
+const GameScreen = () => {
   return (
     <View style={STYLES.container}>
-      <Text>SettingScreen</Text>
+      <Text>GameScreen</Text>
     </View>
   );
 };
 
-export default SettingScreen;
+export default GameScreen;
 
 const styles = StyleSheet.create({});

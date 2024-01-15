@@ -6,14 +6,17 @@ import {
   Setting,
   Sort,
 } from 'iconsax-react-native';
-import HomeScreen from '~screens/Home/HomeScreen';
 import {COLORS, SIZES} from './theme';
+import LiveScreen from '~screens/Live/LiveScreen';
+import GameScreen from '~screens/Games/GameScreen';
+import OfferScreen from '~screens/Offers/OfferScreen';
+import SettingScreen from '~screens/Settings/SettingScreen';
 
 const bottomTabList = [
   {
     id: 'bottomTabsList01',
     name: 'Live',
-    component: HomeScreen,
+    component: LiveScreen,
     icon: (
       <Brodcast size={SIZES.s3xl} variant="Linear" color={COLORS.appGray} />
     ),
@@ -24,14 +27,14 @@ const bottomTabList = [
   {
     id: 'bottomTabsList02',
     name: 'Games',
-    component: HomeScreen,
+    component: GameScreen,
     icon: <Game size={SIZES.s3xl} variant="Linear" color={COLORS.appGray} />,
     active: <Game size={SIZES.s3xl} variant="Bold" color={COLORS.appYellow} />,
   },
   {
     id: 'bottomTabsList03',
     name: 'Offers',
-    component: HomeScreen,
+    component: OfferScreen,
     icon: (
       <DiscountCircle
         size={SIZES.s3xl}
@@ -50,7 +53,7 @@ const bottomTabList = [
   {
     id: 'bottomTabsList04',
     name: 'Settings',
-    component: HomeScreen,
+    component: SettingScreen,
     icon: <Setting size={SIZES.s3xl} variant="Linear" color={COLORS.appGray} />,
     active: (
       <Setting size={SIZES.s3xl} variant="Bold" color={COLORS.appYellow} />

@@ -1,8 +1,8 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import {Platform} from 'react-native';
-
-import {STATIC_DATA, COLORS, SIZES, FONTS} from '~assets/constants';
+import STATIC_DATA from '~assets/constants/common';
+import {COLORS, FONTS, SIZES} from '~assets/constants/theme';
 
 const Tab = createBottomTabNavigator();
 

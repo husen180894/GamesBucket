@@ -1,12 +1,11 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {SIZES, STYLES, IMAGES} from '~assets/constants';
+import {SIZES, STYLES} from '~assets/constants/theme';
 import TopLRHeader from '~components/headers/TopLRHeader';
+import IMAGES from '~assets/constants/images';
 import StatsCard from '~components/cards/livetab/StatsCard';
 const {awward_icon, tag_icon} = IMAGES;
-
-const HomeScreen = props => {
-  const {navigation} = props;
+const LiveScreen = () => {
   return (
     <View style={STYLES.container}>
       <TopLRHeader
@@ -22,7 +21,7 @@ const HomeScreen = props => {
   );
 };
 
-export default HomeScreen;
+export default LiveScreen;
 
 const styles = StyleSheet.create({
   statsContainer: {

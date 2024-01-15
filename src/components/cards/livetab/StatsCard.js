@@ -1,6 +1,6 @@
 import {Image, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {COLORS, FONTS, RADIUS, SIZES} from '~assets/constants';
+import {COLORS, FONTS, RADIUS, SIZES} from '~assets/constants/theme';
 
 const StatsCard = props => {
   const {icon, title, value} = props;
