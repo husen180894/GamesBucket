@@ -96,9 +96,61 @@ export const topHeaderData = [
   },
 ];
 
+const gamesPlatforms = [
+  {
+    id: 'gp01',
+    name: 'All',
+  },
+  {
+    id: 'gp02',
+    name: 'PlayStation',
+  },
+  {
+    id: 'gp03',
+    name: 'Xbox',
+  },
+  {
+    id: 'gp04',
+    name: 'Nintendo Switch',
+  },
+  {
+    id: 'gp05',
+    name: 'PC',
+  },
+  {
+    id: 'gp06',
+    name: 'Mobile',
+  },
+  {
+    id: 'gp07',
+    name: 'PlayStation 2',
+  },
+  {
+    id: 'gp08',
+    name: 'Xbox 360',
+  },
+  {
+    id: 'gp09',
+    name: 'PlayStation 5',
+  },
+  {
+    id: 'gp10',
+    name: 'Xbox Series X',
+  },
+  {
+    id: 'gp11',
+    name: 'PlayStation 6',
+  },
+  {
+    id: 'gp12',
+    name: 'Mybox Series X',
+  },
+];
+
 const STATIC_DATA = {
   bottomTabList,
   topHeaderData,
+  gamesPlatforms,
 };
 
 export default STATIC_DATA;
