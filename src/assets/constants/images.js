@@ -10,5 +10,6 @@ const IMAGES = {
   awward_icon,
   tag_icon,
   dumy_pic,
+  dumy_platform,
 };
 export default IMAGES;

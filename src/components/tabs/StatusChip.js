@@ -8,9 +8,8 @@ const StatusChip = props => {
   return (
     <Chip buttonStyle={styles.container}>
       <View style={[STYLES.flexRowCenter, {gap: 4}]}>
-        <View style={styles.indicator}>
-          <Text style={styles.title}>{title || ''}</Text>
-        </View>
+        <View style={styles.indicator} />
+        <Text style={styles.title}>{title || ''}</Text>
       </View>
     </Chip>
   );
