@@ -7,14 +7,15 @@ import StatsCard from '~components/cards/livetab/StatsCard';
 import STATIC_DATA from '~assets/constants/common';
 import Platformlist from '~components/tabs/Platformlist';
 import GACard from '~components/cards/livetab/GACard';
+import LGFilterModal from '~components/modals/LGFilterModal';
 
 const {awward_icon, tag_icon, dumy_platform} = IMAGES;
 // const {gamesPlatforms} = STATIC_DATA;
 
 const LiveScreen = props => {
   const {navigation} = props;
-
   const [selectedPlatform, setSelectedPlatform] = useState('All');
+  const [showFilters, setShowFilters] = useState(false);
 
   const handleChangePlatform = item => {
     setSelectedPlatform(item);
@@ -22,12 +23,24 @@ const LiveScreen = props => {
     // write logic to refetch all giveaway for the selected flatform
   };
 
+  //toggle filter modal
+  const toggleFilterModal = () => {
+    setShowFilters(!showFilters);
+  };
+
+  // function to handle header action
+  const handleHeaderAction = type => {
+    if (type === 'filter') {
+      toggleFilterModal();
+    }
+  };
+
   return (
     <View style={STYLES.container}>
       <TopLRHeader
         title="Live Giveaway"
         type="live"
-        onAction={val => console.log(val)}
+        onAction={val => handleHeaderAction(val)}
       />
       <View style={styles.statsContainer}>
         <StatsCard title="Total" value="Rp. 200" icon={awward_icon} />
@@ -47,8 +60,12 @@ const LiveScreen = props => {
         contentInsetAdjustmentBehavior="automatic">
         <View>
           <GACard />
+          <GACard />
+          <GACard />
+          <GACard />
         </View>
       </ScrollView>
+      <LGFilterModal show={showFilters} onClose={() => toggleFilterModal()} />
     </View>
   );
 };
