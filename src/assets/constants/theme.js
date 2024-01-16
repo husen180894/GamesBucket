@@ -76,6 +76,34 @@ export const STYLES = {
     fontFamily: FONTS.fnm,
     color: COLORS.white,
   },
+
+  // grid/flex styles
+  flexRowStart: {
+    flexDirection: 'row',
+    display: 'flex',
+    justifyContent: 'flex-start',
+  },
+  flexColStart: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+  },
+
+  flexColBetween: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
+
+  flexRowBetween: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+
+  marginVerticalSm: {
+    marginVertical: 14,
+  },
 };
 
 const appTheme = {
