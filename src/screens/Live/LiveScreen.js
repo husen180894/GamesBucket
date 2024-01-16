@@ -13,9 +13,10 @@ import IMAGES from '~assets/constants/images';
 import StatsCard from '~components/cards/livetab/StatsCard';
 import STATIC_DATA from '~assets/constants/common';
 import Platformlist from '~components/tabs/Platformlist';
-import {Button, Card, Chip, SearchBar} from '@rneui/themed';
+import {Button, Card, Chip, Image, SearchBar} from '@rneui/themed';
 import AppCta from '~components/buttons/AppCta';
 import {Profile2User} from 'iconsax-react-native';
+import StatusChip from '~components/tabs/StatusChip';
 const {awward_icon, tag_icon} = IMAGES;
 // const {gamesPlatforms} = STATIC_DATA;
 
@@ -61,8 +62,13 @@ const LiveScreen = props => {
               resizeMode="cover">
               <View style={[STYLES.flexColBetween, {height: 200, padding: 15}]}>
                 <View style={STYLES.flexRowBetween}>
-                  <Text>Active</Text>
-                  <Text>Icons</Text>
+                  <StatusChip title="Active" />
+                  <Text>
+                    <Image
+                      source={IMAGES.dumy_platform}
+                      style={styles.giveAwayCardPlatform}
+                    />
+                  </Text>
                 </View>
                 <View style={[STYLES.flexRowStart, {gap: 3}]}>
                   <Profile2User size="18" variant="Bold" color="#fff" />
@@ -164,5 +170,10 @@ const styles = StyleSheet.create({
     fontSize: SIZES.smd,
     fontFamily: FONTS.fnm,
     color: COLORS.white,
+  },
+  giveAwayCardPlatform: {
+    width: 30,
+    height: 30,
+    borderRadius: RADIUS.rmd,
   },
 });

@@ -4,6 +4,7 @@ export const tag_icon = require('../images/tag.png');
 
 //dumy pic
 export const dumy_pic = require('../images/dumy_pic.png');
+export const dumy_platform = require('../images/dummy_platform.png');
 
 const IMAGES = {
   awward_icon,
