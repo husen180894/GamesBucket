@@ -1,7 +1,9 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {BottomSheet} from '@rneui/themed';
-import {COLORS, SIZES} from '~assets/constants/theme';
+import {BottomSheet, Divider} from '@rneui/themed';
+import {COLORS, FONTS, RADIUS, SIZES, STYLES} from '~assets/constants/theme';
+import {Pressable} from 'react-native';
+import DynamicIcon from '~components/common/DynamicIcon';
 
 const LGFilterModal = props => {
   const {show, onClose} = props;
@@ -11,8 +13,21 @@ const LGFilterModal = props => {
       onBackdropPress={onClose}
       backdropStyle={styles.bottomSheetBackdrop}
       containerStyle={styles.bottomSheetContainer}>
-      <View>
-        <Text>modal</Text>
+      <View style={styles.container}>
+        <View style={[STYLES.flexRowBetween, styles.bottomSheetHeader]}>
+          <Text style={styles.bottomSheetTitle}>Filters</Text>
+
+          <Pressable
+            onPress={onClose}
+            android_ripple={{
+              color: COLORS.appGray,
+              borderless: true,
+            }}
+            hitSlop={50}>
+            <DynamicIcon name="CloseCircle" color="#c2c2c2" size={22} />
+          </Pressable>
+        </View>
+        <Divider />
       </View>
     </BottomSheet>
   );
@@ -28,6 +43,22 @@ const styles = StyleSheet.create({
   },
   bottomSheetContainer: {
     backgroundColor: COLORS.appSecondary,
-    maxHeight: SIZES.HEIGHT * 0.7,
+    maxHeight: SIZES.HEIGHT * 0.8,
+    marginTop: 'auto',
+    borderRadius: RADIUS.r3xl,
+    marginHorizontal: 10,
+    alignItems: 'flex-start',
+    padding: 20,
+  },
+  container: {
+    width: '100%',
+  },
+  bottomSheetHeader: {
+    paddingBottom: 20,
+    width: '100%',
+  },
+  bottomSheetTitle: {
+    fontFamily: FONTS.fnm,
+    fontSize: SIZES.slg,
   },
 });

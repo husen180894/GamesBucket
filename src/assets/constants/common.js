@@ -68,12 +68,12 @@ export const topHeaderData = [
     options: [
       {
         id: 'topTabOptions01',
-        icon: <SearchNormal size={SIZES.sxxl} color={COLORS.white} />,
+        icon: 'SearchNormal1',
         name: 'search',
       },
       {
         id: 'topTabOptions02',
-        icon: <Sort size={SIZES.sxxl} color={COLORS.white} />,
+        icon: 'Sort',
         name: 'filter',
       },
     ],
@@ -84,12 +84,12 @@ export const topHeaderData = [
     options: [
       {
         id: 'topTabOptions21',
-        icon: <SearchNormal size={SIZES.sxxl} color={COLORS.white} />,
+        icon: 'SearchNormal',
         name: 'search',
       },
       {
         id: 'topTabOptions22',
-        icon: <Sort size={SIZES.sxxl} color={COLORS.white} />,
+        icon: 'Sort',
         name: 'filter',
       },
     ],

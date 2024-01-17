@@ -1,8 +1,15 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import {Header} from '@rneui/themed';
 import {COLORS, SIZES, STYLES} from '~assets/constants/theme';
 import {topHeaderData} from '~assets/constants/common';
+import DynamicIcon from '~components/common/DynamicIcon';
 
 const TopLRHeader = props => {
   const {title, type, onAction} = props;
@@ -25,11 +32,20 @@ const TopLRHeader = props => {
           {rightOptions &&
             rightOptions.options.map(option => {
               return (
-                <TouchableOpacity
+                <Pressable
+                  android_ripple={{
+                    color: COLORS.appGray,
+                    borderless: true,
+                  }}
+                  hitSlop={50}
                   key={option.id}
                   onPress={() => onAction(option.name)}>
-                  {option.icon}
-                </TouchableOpacity>
+                  <DynamicIcon
+                    name={option.icon}
+                    size={SIZES.sxxl}
+                    color={COLORS.white}
+                  />
+                </Pressable>
               );
             })}
         </View>
