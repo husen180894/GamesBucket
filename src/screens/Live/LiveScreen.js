@@ -1,5 +1,5 @@
 import {ScrollView, StyleSheet, View} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {SIZES, STYLES} from '~assets/constants/theme';
 import TopLRHeader from '~components/headers/TopLRHeader';
 import IMAGES from '~assets/constants/images';
@@ -8,6 +8,7 @@ import STATIC_DATA from '~assets/constants/common';
 import Platformlist from '~components/tabs/Platformlist';
 import GACard from '~components/cards/livetab/GACard';
 import LGFilterModal from '~components/modals/LGFilterModal';
+import axios from 'axios';
 
 const {awward_icon, tag_icon, dumy_platform} = IMAGES;
 // const {gamesPlatforms} = STATIC_DATA;
@@ -16,6 +17,25 @@ const LiveScreen = props => {
   const {navigation} = props;
   const [selectedPlatform, setSelectedPlatform] = useState('All');
   const [showFilters, setShowFilters] = useState(false);
+
+  useEffect(() => {
+    fetchTtotlaGiveaway();
+  }, []);
+
+  // fetch total giveaway / stats value
+  const fetchTtotlaGiveaway = async () => {
+    await axios
+      .get('https://www.gamerpower.com/api/worth')
+      .then(function (response) {
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+      .finally(function () {
+        console.log('Hello world i will definitely run');
+      });
+  };
 
   const handleChangePlatform = item => {
     setSelectedPlatform(item);
