@@ -1,10 +1,18 @@
 import React from 'react';
-import {CloseCircle} from 'iconsax-react-native';
+import {
+  CloseCircle,
+  SearchNormal1,
+  Sort,
+  Brodcast,
+  ArrowDown2,
+} from 'iconsax-react-native';
 
 const iconComponents = {
   CloseCircle,
   SearchNormal1,
   Sort,
+  Brodcast,
+  ArrowDown2,
 };
 const DynamicIcon = ({size = '20', color = '#ffffff', name, ...props}) => {
   const IconComponent = iconComponents[name];

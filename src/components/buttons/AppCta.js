@@ -10,7 +10,8 @@ const AppCta = props => {
       buttonStyle={[styles.appCta, customStyle]}
       titleStyle={styles.appCtaTitle}
       size="lg"
-      onPress={onAction}>
+      onPress={onAction}
+      {...props}>
       {title || ''}
     </Button>
   );

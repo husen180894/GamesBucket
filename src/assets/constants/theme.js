@@ -13,6 +13,7 @@ export const COLORS = {
   appGreen: '#6b6b6b',
   appLightGreen: '#ACACAC',
   appGray: '#8593a3',
+  appLightGray: '#B1B1B1',
   appTransparent: '#ffffff00',
 };
 
@@ -106,6 +107,38 @@ export const STYLES = {
   },
   marginVerticalSm: {
     marginVertical: 14,
+  },
+
+  // modals/bottomsheet styles
+  bottomSheetBackdrop: {
+    backgroundColor: COLORS.black,
+    opacity: 0.4,
+    marginTop: 'auto',
+  },
+  bottomSheetContainer: {
+    backgroundColor: COLORS.appSecondary,
+    maxHeight: SIZES.HEIGHT * 0.8,
+    marginTop: 'auto',
+    borderRadius: RADIUS.r3xl,
+    marginHorizontal: 10,
+    alignItems: 'flex-start',
+    padding: 20,
+  },
+  bottomSheetHeader: {
+    paddingBottom: 20,
+    width: '100%',
+  },
+  bottomSheetTitle: {
+    fontFamily: FONTS.fnm,
+    fontSize: SIZES.slg,
+  },
+
+  // form styles
+  formLabel: {
+    fontFamily: FONTS.fnm,
+    fontSize: SIZES.smd,
+    color: COLORS.appLightGray,
+    marginBottom: 7,
   },
 };
 

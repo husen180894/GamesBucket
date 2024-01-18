@@ -1,16 +1,10 @@
-import {
-  Brodcast,
-  DiscountCircle,
-  Game,
-  SearchNormal,
-  Setting,
-  Sort,
-} from 'iconsax-react-native';
+import {Brodcast, DiscountCircle, Game, Setting} from 'iconsax-react-native';
 import {COLORS, SIZES} from './theme';
 import LiveScreen from '~screens/Live/LiveScreen';
 import GameScreen from '~screens/Games/GameScreen';
 import OfferScreen from '~screens/Offers/OfferScreen';
 import SettingScreen from '~screens/Settings/SettingScreen';
+import DynamicIcon from '~components/common/DynamicIcon';
 
 const bottomTabList = [
   {
@@ -18,10 +12,20 @@ const bottomTabList = [
     name: 'Live',
     component: LiveScreen,
     icon: (
-      <Brodcast size={SIZES.s3xl} variant="Linear" color={COLORS.appGray} />
+      <DynamicIcon
+        name="Brodcast"
+        size={SIZES.s3xl}
+        variant="Linear"
+        color={COLORS.appGray}
+      />
     ),
     active: (
-      <Brodcast size={SIZES.s3xl} variant="Bold" color={COLORS.appYellow} />
+      <DynamicIcon
+        name="Brodcast"
+        size={SIZES.s3xl}
+        variant="Bold"
+        color={COLORS.appYellow}
+      />
     ),
   },
   {
@@ -147,10 +151,49 @@ const gamesPlatforms = [
   },
 ];
 
+const giveAwayTypes = [
+  {
+    key: 'game',
+    value: 'Game',
+  },
+  {
+    key: 'loot',
+    value: 'Loot',
+  },
+  {
+    key: 'beta',
+    value: 'Beta',
+  },
+  {
+    key: 'none',
+    value: 'None',
+  },
+];
+const giveAwaySortby = [
+  {
+    key: 'popularity',
+    value: 'Popularity',
+  },
+  {
+    key: 'value',
+    value: 'Value',
+  },
+  {
+    key: 'date',
+    value: 'Date',
+  },
+  {
+    key: 'none',
+    value: 'None',
+  },
+];
+
 const STATIC_DATA = {
   bottomTabList,
   topHeaderData,
   gamesPlatforms,
+  giveAwayTypes,
+  giveAwaySortby,
 };
 
 export default STATIC_DATA;
