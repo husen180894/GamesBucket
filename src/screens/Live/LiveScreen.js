@@ -8,15 +8,15 @@ import STATIC_DATA from '~assets/constants/common';
 import Platformlist from '~components/tabs/Platformlist';
 import GACard from '~components/cards/livetab/GACard';
 import LGFilterModal from '~components/modals/LGFilterModal';
-import axios from 'axios';
-
-const {awward_icon, tag_icon, dumy_platform} = IMAGES;
-// const {gamesPlatforms} = STATIC_DATA;
+import endpoints from '~apis/endpoints';
+import {apiCall} from '~apis';
 
 const LiveScreen = props => {
   const {navigation} = props;
   const [selectedPlatform, setSelectedPlatform] = useState('All');
   const [showFilters, setShowFilters] = useState(false);
+  const [statsError, setStatsError] = useState(null);
+  const [stats, setStats] = useState(null);
 
   useEffect(() => {
     fetchTtotlaGiveaway();
@@ -24,17 +24,15 @@ const LiveScreen = props => {
 
   // fetch total giveaway / stats value
   const fetchTtotlaGiveaway = async () => {
-    await axios
-      .get('https://www.gamerpower.com/api/worth')
-      .then(function (response) {
-        console.log(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
-      .finally(function () {
-        console.log('Hello world i will definitely run');
-      });
+    const {hasError, error, rawData} = await apiCall('GET', '/worth');
+    if (hasError) {
+      console.log(error);
+      setStatsError(error);
+    } else {
+      console.log('Data: ', rawData);
+      setStats(rawData);
+      setStatsError('Some error occureed');
+    }
   };
 
   const handleChangePlatform = item => {
@@ -62,10 +60,20 @@ const LiveScreen = props => {
         type="live"
         onAction={val => handleHeaderAction(val)}
       />
-      <View style={styles.statsContainer}>
-        <StatsCard title="Total" value="Rp. 200" icon={awward_icon} />
-        <StatsCard title="Active" value="119" icon={tag_icon} />
-      </View>
+      {statsError !== null && (
+        <View style={styles.statsContainer}>
+          <StatsCard
+            title="Total"
+            value={`$ ${stats?.worth_estimation_usd}`}
+            icon={IMAGES.awward_icon}
+          />
+          <StatsCard
+            title="Active"
+            value={stats?.active_giveaways_number}
+            icon={IMAGES.tag_icon}
+          />
+        </View>
+      )}
       <View>
         <Platformlist
           categories={STATIC_DATA.gamesPlatforms}

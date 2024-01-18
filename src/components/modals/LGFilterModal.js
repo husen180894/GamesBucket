@@ -9,9 +9,8 @@ import STATIC_DATA from '~assets/constants/common';
 import SelectDropdown from '~components/common/SelectDropdown';
 import AppCta from '~components/buttons/AppCta';
 
-const {giveAwayTypes, giveAwaySortby} = STATIC_DATA;
-
 const LGFilterModal = props => {
+  const {giveAwayTypes, giveAwaySortby} = STATIC_DATA;
   const {show, onClose} = props;
 
   const [selected, setSelected] = useState('');

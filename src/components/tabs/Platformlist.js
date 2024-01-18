@@ -44,10 +44,9 @@ export default Platformlist;
 const styles = StyleSheet.create({
   contentContainerStyle: {
     backgroundColor: COLORS.appTransparent,
-    paddingVertical: SIZES.s7xl,
+    paddingVertical: 15,
     paddingHorizontal: 15,
-    paddingVertical: SIZES.ssm,
-    gap: SIZES.ssm,
+    gap: 5,
   },
   platformChip: {
     minWidth: 50,
