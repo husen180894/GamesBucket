@@ -1,5 +1,5 @@
 import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef} from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import {StatusBar} from 'react-native';
 
@@ -7,10 +7,13 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import MainStack from './src/screens/Stacks/MainStack';
+import FlashMessage from 'react-native-flash-message';
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
+  const flashMessage = useRef();
+
   useEffect(() => {
     SplashScreen.hide();
   }, []);
@@ -25,6 +28,7 @@ const App = () => {
           <Stack.Screen name="Main" component={MainStack} />
         </Stack.Navigator>
       </NavigationContainer>
+      <FlashMessage ref={flashMessage} floating={true} position="top" />
     </SafeAreaView>
   );
 };

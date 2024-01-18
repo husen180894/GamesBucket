@@ -8,8 +8,11 @@ import STATIC_DATA from '~assets/constants/common';
 import Platformlist from '~components/tabs/Platformlist';
 import GACard from '~components/cards/livetab/GACard';
 import LGFilterModal from '~components/modals/LGFilterModal';
-import endpoints from '~apis/endpoints';
+
+import {showMessage} from 'react-native-flash-message';
 import {apiCall} from '~apis';
+import {toatsConfig} from '~assets/functions';
+import {Divider} from '@rneui/themed';
 
 const LiveScreen = props => {
   const {navigation} = props;
@@ -17,6 +20,18 @@ const LiveScreen = props => {
   const [showFilters, setShowFilters] = useState(false);
   const [statsError, setStatsError] = useState(null);
   const [stats, setStats] = useState(null);
+  var [scrollY, setScrollY] = useState(0);
+  const [gameData, setGameData] = useState([
+    {
+      id: 0,
+    },
+    {
+      id: 1,
+    },
+    {
+      id: 2,
+    },
+  ]);
 
   useEffect(() => {
     fetchTtotlaGiveaway();
@@ -26,12 +41,22 @@ const LiveScreen = props => {
   const fetchTtotlaGiveaway = async () => {
     const {hasError, error, rawData} = await apiCall('GET', '/worth');
     if (hasError) {
-      console.log(error);
+      showMessage({
+        message: 'Stats Error',
+        description: error,
+        ...toatsConfig('danger'),
+      });
       setStatsError(error);
     } else {
-      console.log('Data: ', rawData);
       setStats(rawData);
-      setStatsError('Some error occureed');
+    }
+  };
+
+  //function to set value scrollY
+  const handleScrollY = event => {
+    if (gameData.length > 2) {
+      console.log(event);
+      setScrollY(event.nativeEvent.contentOffset.y);
     }
   };
 
@@ -60,7 +85,7 @@ const LiveScreen = props => {
         type="live"
         onAction={val => handleHeaderAction(val)}
       />
-      {statsError !== null && (
+      {statsError == null && scrollY < 150 && (
         <View style={styles.statsContainer}>
           <StatsCard
             title="Total"
@@ -74,6 +99,7 @@ const LiveScreen = props => {
           />
         </View>
       )}
+      {scrollY > 150 && <Divider />}
       <View>
         <Platformlist
           categories={STATIC_DATA.gamesPlatforms}
@@ -85,7 +111,8 @@ const LiveScreen = props => {
       <ScrollView
         scrollEnabled={true}
         showsVerticalScrollIndicator={false}
-        contentInsetAdjustmentBehavior="automatic">
+        contentInsetAdjustmentBehavior="automatic"
+        onScroll={event => handleScrollY(event)}>
         <View>
           <GACard />
           <GACard />
@@ -107,6 +134,7 @@ const styles = StyleSheet.create({
     alignItems: 'start',
     justifyContent: 'center',
     gap: SIZES.sxl,
+    marginBottom: 15,
     width: '100%',
   },
 });
