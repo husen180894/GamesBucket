@@ -108,6 +108,7 @@ const gamesPlatforms = [
   {
     id: 'gp02',
     name: 'PlayStation',
+    label: 'PlayStation',
   },
   {
     id: 'gp03',

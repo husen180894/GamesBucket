@@ -140,6 +140,15 @@ export const STYLES = {
     color: COLORS.appLightGray,
     marginBottom: 7,
   },
+
+  // global styles
+  offerPrice: {
+    fontFamily: FONTS.fnm,
+    fontSize: SIZES.smd,
+    color: COLORS.appLightGray,
+    textDecorationLine: 'line-through',
+    textDecorationStyle: 'solid',
+  },
 };
 
 const appTheme = {

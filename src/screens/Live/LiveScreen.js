@@ -1,4 +1,4 @@
-import {ScrollView, StyleSheet, View} from 'react-native';
+import {FlatList, ScrollView, StyleSheet, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {SIZES, STYLES} from '~assets/constants/theme';
 import TopLRHeader from '~components/headers/TopLRHeader';
@@ -13,6 +13,7 @@ import {showMessage} from 'react-native-flash-message';
 import {apiCall} from '~apis';
 import {toatsConfig} from '~assets/functions';
 import {Divider} from '@rneui/themed';
+import endpoints from '~apis/endpoints';
 
 const LiveScreen = props => {
   const {navigation} = props;
@@ -21,25 +22,19 @@ const LiveScreen = props => {
   const [statsError, setStatsError] = useState(null);
   const [stats, setStats] = useState(null);
   var [scrollY, setScrollY] = useState(0);
-  const [gameData, setGameData] = useState([
-    {
-      id: 0,
-    },
-    {
-      id: 1,
-    },
-    {
-      id: 2,
-    },
-  ]);
+  const [gameData, setGameData] = useState([]);
 
   useEffect(() => {
     fetchTtotlaGiveaway();
+    fetchGiveawaysList();
   }, []);
 
   // fetch total giveaway / stats value
   const fetchTtotlaGiveaway = async () => {
-    const {hasError, error, rawData} = await apiCall('GET', '/worth');
+    const {hasError, error, rawData} = await apiCall(
+      'GET',
+      endpoints.total_giveaway,
+    );
     if (hasError) {
       showMessage({
         message: 'Stats Error',
@@ -52,10 +47,27 @@ const LiveScreen = props => {
     }
   };
 
+  // fetch total giveaway / stats value
+  const fetchGiveawaysList = async () => {
+    const {hasError, error, rawData} = await apiCall(
+      'GET',
+      endpoints.giveaway_list,
+    );
+    if (hasError) {
+      showMessage({
+        message: 'Stats Error',
+        description: error,
+        ...toatsConfig('danger'),
+      });
+      setGameData([]);
+    } else {
+      setGameData(rawData);
+    }
+  };
+
   //function to set value scrollY
   const handleScrollY = event => {
     if (gameData.length > 2) {
-      console.log(event);
       setScrollY(event.nativeEvent.contentOffset.y);
     }
   };
@@ -76,6 +88,11 @@ const LiveScreen = props => {
     if (type === 'filter') {
       toggleFilterModal();
     }
+  };
+
+  // render game data
+  const renderGameData = ({item}) => {
+    return <GACard data={item} />;
   };
 
   return (
@@ -113,12 +130,11 @@ const LiveScreen = props => {
         showsVerticalScrollIndicator={false}
         contentInsetAdjustmentBehavior="automatic"
         onScroll={event => handleScrollY(event)}>
-        <View>
-          <GACard />
-          <GACard />
-          <GACard />
-          <GACard />
-        </View>
+        <FlatList
+          data={gameData}
+          renderItem={renderGameData}
+          keyExtractor={item => item.id.toString()}
+        />
       </ScrollView>
       <LGFilterModal show={showFilters} onClose={() => toggleFilterModal()} />
     </View>

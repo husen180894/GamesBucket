@@ -12,12 +12,13 @@ const GACard = props => {
   return (
     <Card containerStyle={styles.giveAwayCard}>
       <ImageBackground
-        source={IMAGES.dumy_pic}
+        source={{uri: data?.thumbnail}}
         style={styles.giveAwayCardImage}
         resizeMode="cover">
         <View style={[STYLES.flexColBetween, {height: 200, padding: 15}]}>
           <View style={STYLES.flexRowBetween}>
-            <StatusChip title="Active" />
+            <StatusChip title={data?.status ?? 'Not available'} />
+
             <Text>
               <Image
                 source={IMAGES.dumy_platform}
@@ -28,35 +29,45 @@ const GACard = props => {
           <View style={[STYLES.flexRowStart, {gap: 3}]}>
             <Profile2User size="18" variant="Bold" color="#fff" />
             <Text style={styles.giveAwayCardStats}>
-              14370+ users collected this loot
+              {data?.users}+ users collected this loot
             </Text>
           </View>
         </View>
       </ImageBackground>
 
       <View style={styles.giveAwayCardContent}>
-        <View style={[STYLES.flexRowStart, {gap: 6}]}>
-          <Chip
-            title="PC Game"
-            buttonStyle={styles.giveAwayCardChip}
-            titleStyle={styles.giveAwayCardChipTitle}
-          />
-          <Chip
-            title="FREE"
-            buttonStyle={styles.giveAwayCardChip}
-            titleStyle={styles.giveAwayCardChipTitle}
-          />
+        <View style={STYLES.flexRowBetween}>
+          <View style={[STYLES.flexRowStart, {gap: 10}]}>
+            <Chip
+              title={data?.type ?? 'Game'}
+              buttonStyle={styles.giveAwayCardChip}
+              titleStyle={styles.giveAwayCardChipTitle}
+            />
+            <Chip
+              title="FREE"
+              buttonStyle={styles.giveAwayCardChip}
+              titleStyle={styles.giveAwayCardChipTitle}
+            />
+          </View>
+
+          {data?.worth && data?.worth !== 'N/A' && (
+            <Text style={STYLES.offerPrice}>{data?.worth}</Text>
+          )}
         </View>
         <View style={[STYLES.marginVerticalSm, STYLES.flexColStart, {gap: 10}]}>
           <Text style={styles.giveAwayCardTitle} numberOfLines={1}>
-            FIFA 22 (Epic Games) Giveaway
+            {data?.title || 'Giveaway game'}
           </Text>
           <Text style={styles.giveAwayCardTime}>
-            Live Now - Jun 08 at 08:30 PM
+            {data?.published_date}{' '}
+            {data?.end_date !== 'N/A' ? ` - ${data?.end_date}` : ''}
           </Text>
         </View>
         <View style={{marginTop: 14}}>
-          <AppCta title="View Game" onAction={() => onAction('cicked')} />
+          <AppCta
+            title={`View ${data?.type}`}
+            onAction={() => onAction('cicked')}
+          />
         </View>
       </View>
     </Card>
