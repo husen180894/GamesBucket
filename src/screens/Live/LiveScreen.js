@@ -1,5 +1,5 @@
 import {FlatList, ScrollView, StyleSheet, View} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {SIZES, STYLES} from '~assets/constants/theme';
 import TopLRHeader from '~components/headers/TopLRHeader';
 import IMAGES from '~assets/constants/images';
@@ -12,8 +12,10 @@ import LGFilterModal from '~components/modals/LGFilterModal';
 import {showMessage} from 'react-native-flash-message';
 import {apiCall} from '~apis';
 import {toatsConfig} from '~assets/functions';
-import {Divider} from '@rneui/themed';
+import {Button, Divider} from '@rneui/themed';
 import endpoints from '~apis/endpoints';
+import {FlashList} from '@shopify/flash-list';
+import VirtualizedScrollView from '~components/common/ScrollList';
 
 const LiveScreen = props => {
   const {navigation} = props;
@@ -94,6 +96,18 @@ const LiveScreen = props => {
   const renderGameData = ({item}) => {
     return <GACard data={item} />;
   };
+  // const renderGameData = useCallback(({item}) => {
+  //   <GACard data={item} />;
+  // }, []);
+
+  //list footer component
+  const ListFooter = () => {
+    return (
+      <View style={{marginVertical: 20}}>
+        <Button>Load more</Button>
+      </View>
+    );
+  };
 
   return (
     <View style={STYLES.container}>
@@ -125,17 +139,31 @@ const LiveScreen = props => {
         />
       </View>
 
-      <ScrollView
-        scrollEnabled={true}
-        showsVerticalScrollIndicator={false}
-        contentInsetAdjustmentBehavior="automatic"
-        onScroll={event => handleScrollY(event)}>
-        <FlatList
-          data={gameData}
-          renderItem={renderGameData}
-          keyExtractor={item => item.id.toString()}
-        />
-      </ScrollView>
+      <FlatList
+        data={gameData.slice(0, 5)}
+        renderItem={renderGameData}
+        contentContainerStyle={{paddingBottom: 100}}
+        maxToRenderPerBatch={4}
+        initialNumToRender={4}
+        removeClippedSubviews={true}
+        getItemLayout={(data, index) => ({
+          length: 400,
+          offset: 400 * index,
+          index,
+        })}
+        keyExtractor={item => item.id.toString()}
+        onScroll={event => handleScrollY(event)}
+        ListFooterComponent={ListFooter}
+      />
+      {/* <FlashList
+        data={gameData}
+        renderItem={renderGameData}
+        keyExtractor={item => item.id.toString()}
+        estimatedItemSize={150}
+        disableHorizontalListHeightMeasurement={true}
+        onScroll={event => handleScrollY(event)}
+      /> */}
+
       <LGFilterModal show={showFilters} onClose={() => toggleFilterModal()} />
     </View>
   );

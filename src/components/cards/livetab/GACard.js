@@ -6,19 +6,24 @@ import {COLORS, FONTS, RADIUS, SIZES, STYLES} from '~assets/constants/theme';
 import StatusChip from '~components/tabs/StatusChip';
 import AppCta from '~components/buttons/AppCta';
 import {Profile2User} from 'iconsax-react-native';
+import moment from 'moment';
+import FastImage from 'react-native-fast-image';
 
-const GACard = props => {
+const GACard = React.memo(props => {
   const {data, onAction} = props;
   return (
     <Card containerStyle={styles.giveAwayCard}>
-      <ImageBackground
-        source={{uri: data?.thumbnail}}
+      <FastImage
+        source={{
+          uri: data?.thumbnail,
+          headers: {Authorization: 'someAuthToken'},
+          priority: FastImage.priority.normal,
+        }}
         style={styles.giveAwayCardImage}
-        resizeMode="cover">
+        resizeMode={FastImage.resizeMode.cover}>
         <View style={[STYLES.flexColBetween, {height: 200, padding: 15}]}>
           <View style={STYLES.flexRowBetween}>
             <StatusChip title={data?.status ?? 'Not available'} />
-
             <Text>
               <Image
                 source={IMAGES.dumy_platform}
@@ -33,7 +38,7 @@ const GACard = props => {
             </Text>
           </View>
         </View>
-      </ImageBackground>
+      </FastImage>
 
       <View style={styles.giveAwayCardContent}>
         <View style={STYLES.flexRowBetween}>
@@ -59,8 +64,10 @@ const GACard = props => {
             {data?.title || 'Giveaway game'}
           </Text>
           <Text style={styles.giveAwayCardTime}>
-            {data?.published_date}{' '}
-            {data?.end_date !== 'N/A' ? ` - ${data?.end_date}` : ''}
+            {moment(data?.published_date).format('DD MMM YYYY , h:mm')}
+            {data?.end_date !== 'N/A'
+              ? ` - ${moment(data?.end_date).format('DD MMM YYYY , h:mm')}`
+              : ''}
           </Text>
         </View>
         <View style={{marginTop: 14}}>
@@ -72,7 +79,7 @@ const GACard = props => {
       </View>
     </Card>
   );
-};
+});
 
 export default GACard;
 

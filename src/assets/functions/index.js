@@ -29,3 +29,5 @@ export const toatsConfig = type => {
     };
   }
 };
+
+//live screen custom functions
