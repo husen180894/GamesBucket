@@ -1,6 +1,6 @@
-import {FlatList, ScrollView, StyleSheet, View} from 'react-native';
+import {FlatList, ScrollView, StyleSheet, View, Text} from 'react-native';
 import React, {useCallback, useEffect, useState} from 'react';
-import {SIZES, STYLES} from '~assets/constants/theme';
+import {COLORS, SIZES, STYLES} from '~assets/constants/theme';
 import TopLRHeader from '~components/headers/TopLRHeader';
 import IMAGES from '~assets/constants/images';
 import StatsCard from '~components/cards/livetab/StatsCard';
@@ -16,6 +16,7 @@ import {Button, Divider} from '@rneui/themed';
 import endpoints from '~apis/endpoints';
 import {FlashList} from '@shopify/flash-list';
 import VirtualizedScrollView from '~components/common/ScrollList';
+const ITEM_HEIGHT = 400;
 
 const LiveScreen = props => {
   const {navigation} = props;
@@ -23,6 +24,7 @@ const LiveScreen = props => {
   const [showFilters, setShowFilters] = useState(false);
   const [statsError, setStatsError] = useState(null);
   const [stats, setStats] = useState(null);
+  const [limit, setLimit] = useState(3);
   var [scrollY, setScrollY] = useState(0);
   const [gameData, setGameData] = useState([]);
 
@@ -93,21 +95,12 @@ const LiveScreen = props => {
   };
 
   // render game data
-  const renderGameData = ({item}) => {
+  // const renderGameData = ({item}) => {
+  //   return <GACard data={item} />;
+  // };
+  const renderGameData = useCallback(({item}) => {
     return <GACard data={item} />;
-  };
-  // const renderGameData = useCallback(({item}) => {
-  //   <GACard data={item} />;
-  // }, []);
-
-  //list footer component
-  const ListFooter = () => {
-    return (
-      <View style={{marginVertical: 20}}>
-        <Button>Load more</Button>
-      </View>
-    );
-  };
+  }, []);
 
   return (
     <View style={STYLES.container}>
@@ -140,20 +133,19 @@ const LiveScreen = props => {
       </View>
 
       <FlatList
-        data={gameData.slice(0, 5)}
+        data={gameData.slice(0, limit)}
         renderItem={renderGameData}
         contentContainerStyle={{paddingBottom: 100}}
         maxToRenderPerBatch={4}
         initialNumToRender={4}
         removeClippedSubviews={true}
         getItemLayout={(data, index) => ({
-          length: 400,
-          offset: 400 * index,
+          length: ITEM_HEIGHT,
+          offset: ITEM_HEIGHT * index,
           index,
         })}
         keyExtractor={item => item.id.toString()}
         onScroll={event => handleScrollY(event)}
-        ListFooterComponent={ListFooter}
       />
       {/* <FlashList
         data={gameData}
