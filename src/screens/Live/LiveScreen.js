@@ -94,6 +94,11 @@ const LiveScreen = props => {
     }
   };
 
+  const handleLoadMore = () => {
+    if (limit <= gameData.length) {
+      setLimit(limit + 3);
+    }
+  };
   // render game data
   // const renderGameData = ({item}) => {
   //   return <GACard data={item} />;
@@ -102,6 +107,35 @@ const LiveScreen = props => {
     return <GACard data={item} />;
   }, []);
 
+  const ListHeader = () => {
+    return (
+      <View>
+        {statsError == null && scrollY < 150 && (
+          <View style={styles.statsContainer}>
+            <StatsCard
+              title="Total"
+              value={`$ ${stats?.worth_estimation_usd}`}
+              icon={IMAGES.awward_icon}
+            />
+            <StatsCard
+              title="Active"
+              value={stats?.active_giveaways_number}
+              icon={IMAGES.tag_icon}
+            />
+          </View>
+        )}
+        {scrollY > 150 && <Divider />}
+        <View>
+          <Platformlist
+            categories={STATIC_DATA.gamesPlatforms}
+            onAction={val => handleChangePlatform(val)}
+            selectedCategory={selectedPlatform}
+          />
+        </View>
+      </View>
+    );
+  };
+
   return (
     <View style={STYLES.container}>
       <TopLRHeader
@@ -109,29 +143,8 @@ const LiveScreen = props => {
         type="live"
         onAction={val => handleHeaderAction(val)}
       />
-      {statsError == null && scrollY < 150 && (
-        <View style={styles.statsContainer}>
-          <StatsCard
-            title="Total"
-            value={`$ ${stats?.worth_estimation_usd}`}
-            icon={IMAGES.awward_icon}
-          />
-          <StatsCard
-            title="Active"
-            value={stats?.active_giveaways_number}
-            icon={IMAGES.tag_icon}
-          />
-        </View>
-      )}
-      {scrollY > 150 && <Divider />}
-      <View>
-        <Platformlist
-          categories={STATIC_DATA.gamesPlatforms}
-          onAction={val => handleChangePlatform(val)}
-          selectedCategory={selectedPlatform}
-        />
-      </View>
 
+      <ListHeader />
       <FlatList
         data={gameData.slice(0, limit)}
         renderItem={renderGameData}
@@ -146,12 +159,15 @@ const LiveScreen = props => {
         })}
         keyExtractor={item => item.id.toString()}
         onScroll={event => handleScrollY(event)}
+        onEndReached={val => handleLoadMore()}
+        onEndReachedThreshold={1}
       />
-      {/* <FlashList
+      {/* <FlashList 
         data={gameData}
         renderItem={renderGameData}
+        contentContainerStyle={{paddingBottom: 100}}
         keyExtractor={item => item.id.toString()}
-        estimatedItemSize={150}
+        estimatedItemSize={ITEM_HEIGHT}
         disableHorizontalListHeightMeasurement={true}
         onScroll={event => handleScrollY(event)}
       /> */}
