@@ -103,52 +103,88 @@ export const topHeaderData = [
 const gamesPlatforms = [
   {
     id: 'gp01',
-    name: 'All',
+    name: 'all',
+    label: 'All',
   },
   {
-    id: 'gp02',
-    name: 'PlayStation',
-    label: 'PlayStation',
+    id: 'gp13',
+    name: 'android',
+    label: 'Android',
   },
   {
-    id: 'gp03',
-    name: 'Xbox',
-  },
-  {
-    id: 'gp04',
-    name: 'Nintendo Switch',
-  },
-  {
-    id: 'gp05',
-    name: 'PC',
-  },
-  {
-    id: 'gp06',
-    name: 'Mobile',
-  },
-  {
-    id: 'gp07',
-    name: 'PlayStation 2',
+    id: 'gp14',
+    name: 'ios',
+    label: 'IOS',
   },
   {
     id: 'gp08',
-    name: 'Xbox 360',
+    name: 'ps4',
+    label: 'PlayStation 4',
   },
   {
     id: 'gp09',
-    name: 'PlayStation 5',
+    name: 'ps5',
+    label: 'PlayStation 5',
   },
   {
     id: 'gp10',
-    name: 'Xbox Series X',
+    name: 'xbox-one',
+    label: 'Xbox One',
   },
   {
     id: 'gp11',
-    name: 'PlayStation 6',
+    name: 'xbox-series-xs',
+    label: 'Xbox Series X',
+  },
+  {
+    id: 'gp02',
+    name: 'pc',
+    label: 'PC',
+  },
+  {
+    id: 'gp03',
+    name: 'steam',
+    label: 'Steam',
+  },
+  {
+    id: 'gp04',
+    name: 'epic-games-store',
+    label: 'Epic Games Store',
+  },
+  {
+    id: 'gp05',
+    name: 'ubisoft',
+    label: 'Ubisoft',
+  },
+  {
+    id: 'gp06',
+    name: 'gog',
+    label: 'Gog',
+  },
+  {
+    id: 'gp07',
+    name: 'itchio',
+    label: 'Itch.io',
   },
   {
     id: 'gp12',
-    name: 'Mybox Series X',
+    name: 'switch',
+    label: 'Switch',
+  },
+  {
+    id: 'gp15',
+    name: 'vr',
+    label: 'VR',
+  },
+  {
+    id: 'gp16',
+    name: 'battlenet',
+    label: 'Battle.net',
+  },
+  {
+    id: 'gp17',
+    name: 'origin',
+    label: 'Origin',
   },
 ];
 

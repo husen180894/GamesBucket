@@ -11,7 +11,7 @@ const Platformlist = props => {
     const isSelected = selectedCategory === item.name;
     return (
       <Chip
-        title={item.name}
+        title={item.label}
         onPress={() => onAction(item.name)}
         buttonStyle={[
           styles.platformChip,

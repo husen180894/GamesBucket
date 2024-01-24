@@ -16,6 +16,8 @@ import {Button, Divider} from '@rneui/themed';
 import endpoints from '~apis/endpoints';
 import {FlashList} from '@shopify/flash-list';
 import VirtualizedScrollView from '~components/common/ScrollList';
+import CustomAnimation from '~components/animations/CustomAnimation';
+import {notfound} from '~assets/constants/animations';
 const ITEM_HEIGHT = 400;
 
 const LiveScreen = props => {
@@ -30,8 +32,11 @@ const LiveScreen = props => {
 
   useEffect(() => {
     fetchTtotlaGiveaway();
-    fetchGiveawaysList();
   }, []);
+
+  useEffect(() => {
+    fetchGiveawaysList(selectedPlatform);
+  }, [selectedPlatform]);
 
   // fetch total giveaway / stats value
   const fetchTtotlaGiveaway = async () => {
@@ -52,10 +57,15 @@ const LiveScreen = props => {
   };
 
   // fetch total giveaway / stats value
-  const fetchGiveawaysList = async () => {
+  const fetchGiveawaysList = async platform => {
+    let params = {platform: null};
+    if (platform !== '' && platform !== 'all') {
+      params = {platform: platform};
+    }
     const {hasError, error, rawData} = await apiCall(
       'GET',
       endpoints.giveaway_list,
+      {params},
     );
     if (hasError) {
       showMessage({
@@ -65,7 +75,9 @@ const LiveScreen = props => {
       });
       setGameData([]);
     } else {
-      setGameData(rawData);
+      if (rawData.length > 0) {
+        setGameData(rawData);
+      }
     }
   };
 
@@ -107,6 +119,18 @@ const LiveScreen = props => {
     return <GACard data={item} />;
   }, []);
 
+  // animation data not found
+  const EmptyList = () => {
+    return (
+      <CustomAnimation
+        title="404"
+        message="Data Not Found"
+        animFile={notfound}
+        style={{minHeight: 200}}
+      />
+    );
+  };
+
   const ListHeader = () => {
     return (
       <View>
@@ -125,13 +149,6 @@ const LiveScreen = props => {
           </View>
         )}
         {scrollY > 150 && <Divider />}
-        <View>
-          <Platformlist
-            categories={STATIC_DATA.gamesPlatforms}
-            onAction={val => handleChangePlatform(val)}
-            selectedCategory={selectedPlatform}
-          />
-        </View>
       </View>
     );
   };
@@ -145,8 +162,17 @@ const LiveScreen = props => {
       />
 
       <ListHeader />
-      <FlatList
-        data={gameData.slice(0, limit)}
+
+      <View>
+        <Platformlist
+          categories={STATIC_DATA.gamesPlatforms}
+          onAction={val => handleChangePlatform(val)}
+          selectedCategory={selectedPlatform}
+        />
+      </View>
+
+      {/* <FlatList
+        data={gameData}
         renderItem={renderGameData}
         contentContainerStyle={{paddingBottom: 100}}
         maxToRenderPerBatch={4}
@@ -159,18 +185,18 @@ const LiveScreen = props => {
         })}
         keyExtractor={item => item.id.toString()}
         onScroll={event => handleScrollY(event)}
-        onEndReached={val => handleLoadMore()}
-        onEndReachedThreshold={1}
-      />
-      {/* <FlashList 
+        ListEmptyComponent={<EmptyList />}
+      /> */}
+      <FlashList
         data={gameData}
         renderItem={renderGameData}
         contentContainerStyle={{paddingBottom: 100}}
-        keyExtractor={item => item.id.toString()}
+        keyExtractor={item => item?.id?.toString()}
         estimatedItemSize={ITEM_HEIGHT}
         disableHorizontalListHeightMeasurement={true}
         onScroll={event => handleScrollY(event)}
-      /> */}
+        ListEmptyComponent={<EmptyList />}
+      />
 
       <LGFilterModal show={showFilters} onClose={() => toggleFilterModal()} />
     </View>
